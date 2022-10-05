@@ -61,7 +61,7 @@ const AuthProvider = ({ children }) => {
         alert("token is valid");
       })
       .catch((err) => {
-        alert("token is invalid");
+        // alert(err.message);
       });
   }, []);
 
