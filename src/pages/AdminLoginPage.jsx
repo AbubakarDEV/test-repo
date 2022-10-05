@@ -5,6 +5,7 @@ import * as yup from "yup";
 import MkdSDK from "../utils/MkdSDK";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../authContext";
+import { GlobalContext, showToast } from "../globalContext";
 
 const AdminLoginPage = () => {
   const schema = yup
@@ -14,7 +15,10 @@ const AdminLoginPage = () => {
     })
     .required();
 
-  const { dispatch } = React.useContext(AuthContext);
+  // const { dispatch } = React.useContext(AuthContext);
+
+  const { dispatch } = React.useContext(GlobalContext);
+
   const navigate = useNavigate();
   const {
     register,
@@ -32,11 +36,13 @@ const AdminLoginPage = () => {
     sdk
       .login(data.email, data.password, role)
       .then((item) => {
-        debugger;
-        sdk.check(item.role);
+        if (!item.error) {
+          showToast(dispatch, "Logged In Sucessfully");
+        }
+        // sdk.check(item.role);
       })
       .catch((err) => {
-        debugger;
+        showToast(dispatch, err.message);
       });
   };
 
