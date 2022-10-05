@@ -27,6 +27,17 @@ const AdminLoginPage = () => {
 
   const onSubmit = async (data) => {
     let sdk = new MkdSDK();
+    const role = "admin";
+    //TODO
+    sdk
+      .login(data.email, data.password, role)
+      .then((item) => {
+        debugger;
+        sdk.check(item.role);
+      })
+      .catch((err) => {
+        debugger;
+      });
   };
 
   return (
