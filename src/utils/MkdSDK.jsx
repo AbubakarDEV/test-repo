@@ -42,7 +42,7 @@ export default function MkdSDK() {
     if (loginResult.status === 403) {
       throw new Error(loginResponse.message);
     }
-    return jsonGet;
+    return loginResponse;
   };
 
   this.getHeader = function () {
@@ -116,6 +116,30 @@ export default function MkdSDK() {
 
   this.check = async function (role) {
     //TODO
+    const payload = {
+      role,
+    };
+    const header = {
+      "Content-Type": "application/json",
+      "x-project": base64Encode,
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    };
+    const roleResult = await fetch(
+      `https://reacttask.mkdlabs.com/v2/api/lambda/check`,
+      {
+        method: "post",
+        headers: header,
+        body: JSON.stringify(payload),
+      }
+    );
+    const roleResponse = await roleResult.json();
+    if (roleResult.status === 401) {
+      throw new Error(roleResponse.message);
+    }
+    if (roleResult.status === 403) {
+      throw new Error(roleResponse.message);
+    }
+    return roleResponse;
   };
 
   return this;
