@@ -39,7 +39,6 @@ const AdminLoginPage = () => {
         if (!item.error) {
           showToast(dispatch, "Logged In Successfully");
         }
-        // sdk.check(item.role);
       })
       .catch((err) => {
         showToast(dispatch, err.message);

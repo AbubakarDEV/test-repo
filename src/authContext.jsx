@@ -54,6 +54,15 @@ const AuthProvider = ({ children }) => {
 
   React.useEffect(() => {
     //TODO
+    const role = localStorage.getItem("role");
+    sdk
+      .check(role)
+      .then((item) => {
+        alert("token is valid");
+      })
+      .catch((err) => {
+        alert("token is invalid");
+      });
   }, []);
 
   return (
