@@ -37,7 +37,7 @@ const AdminLoginPage = () => {
       .login(data.email, data.password, role)
       .then((item) => {
         if (!item.error) {
-          showToast(dispatch, "Logged In Sucessfully");
+          showToast(dispatch, "Logged In Successfully");
         }
         // sdk.check(item.role);
       })
